@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .header{color: blue;}
+    #covid-data{margin: 30px;
+    }
+</style>
+<body>
+    <h1><u>COVID Stats</u> </h1>
+    <p>This site displays current COVID statistics by querying
+         <a href="https://rapidapi.com/api-sports/api/covid-193/details">this COVID-19 API</a> </p>
+    <br><br>
+
+    <div id="covid-data">
+        <h3 class="header"><em>Current USA Covid Data</em> </h3>
+        <p><strong>Critical cases: </strong><%- critical %></p>
+        <p><strong>Total recovered: </strong><%- recovered %></p>
+        <p><strong>Active cases: </strong><%- active %></p>
+        <br><br>
+    
+    </div>
+
+
+    <p class="header"><strong>Search Country Stats</strong></p>
+    <form method="post">
+        <input type="text" name="country" placeholder="'canada'">
+        <input type="submit" value="Search" name="" id="">
+    </form>
+    <br><br><br>
+
+    <h3><a href="/userStats">View User Stats</a></h3> 
+
+
+</body>
+</html>
