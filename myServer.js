@@ -16,7 +16,7 @@ const mongoURI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.M
 
 
 async function runServer(){
-    const portNumber = getCommandLinePortNumber()
+    const portNumber = 3000
     console.log("mongoURI", mongoURI)
     setEJSEngine()
     showHomePage("usa")
