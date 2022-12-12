@@ -8,10 +8,14 @@ const bodyParser = require("body-parser");
 const { countReset } = require("console");
 
 const CREDENTIALS_FOLDER_NAME = "credentials"
+const MONGO_DB_NAME = "finalDatabase"
+const MONGO_COLLECTION = "finalCollection"
+const MONGO_DB_PASSWORD ="Chefina_2703"
+const MONGO_DB_USERNAME = "jigloo"
 //enable access to environment variables from .env file
 require("dotenv").config({ path: path.resolve(__dirname, `${CREDENTIALS_FOLDER_NAME}/.env`) }) 
 
-const mongoURI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.62m9rws.mongodb.net/?retryWrites=true&w=majority`
+const mongoURI = `mongodb+srv://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@cluster0.62m9rws.mongodb.net/?retryWrites=true&w=majority`
 const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function connectToMongo(){
@@ -57,8 +61,8 @@ async function updateOne(client, targetName, newValues) {
     let filter = {name : targetName};
     let update = { $set: newValues };
 
-    const result = await client.db(process.env.MONGO_DB_NAME)
-    .collection(process.env.MONGO_COLLECTION)
+    const result = await client.db(MONGO_DB_NAME)
+    .collection(MONGO_COLLECTION)
     .updateOne(filter, update);
 
     console.log(`Documents modified: ${result.modifiedCount}`);
@@ -95,8 +99,8 @@ async function getUserDiagnoses(){
         /* fetching 1 student */
         console.log("fetching user diagnoses");
         let filter = {}
-		result = await client.db(process.env.MONGO_DB_NAME)
-							.collection(process.env.MONGO_COLLECTION)
+		result = await client.db(MONGO_DB_NAME)
+							.collection(MONGO_COLLECTION)
                             .find(filter).toArray()
                             
 		console.log(`fetched: ${result}`)
