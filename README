@@ -1,1 +1,9 @@
-- run project with: node myServer.js <port number>
+Developers: John Iglesias (jigloo)
+App Description:
+    - Covid Stats website where users can view covid case statistics for every country
+    - Users can also view the site's all-time covid diagnoses and add their own diagnosis data
+
+API Link:
+    - https://rapidapi.com/api-sports/api/covid-193/details
+
+Youtube link: 
