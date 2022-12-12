@@ -12,7 +12,8 @@ const CREDENTIALS_FOLDER_NAME = "credentials"
 require("dotenv").config({ path: path.resolve(__dirname, `${CREDENTIALS_FOLDER_NAME}/.env`) }) 
 
 const mongoURI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.62m9rws.mongodb.net/?retryWrites=true&w=majority`
-
+const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+await mongoClient.connect();
 
 
 async function runServer(){
@@ -30,11 +31,9 @@ async function runServer(){
 }
 
 async function addDiagnosesToDB(count){
-    const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
     try {
-        await client.connect();
-       
+        
         /* Inserting */
         console.log("INSERTING");
         let targetName = "diagnoses"
@@ -42,14 +41,12 @@ async function addDiagnosesToDB(count){
         let newCount = originalCount + count
 
         let newValues = {diagnoses: newCount}
-        await updateOne(client, targetName, newValues)
+        await updateOne(mongoClient, targetName, newValues)
         
 
     } catch (e) {
         console.error(e);
-    } finally {
-        await client.close();
-    }
+    } 
 
 }
 
@@ -91,9 +88,7 @@ function showUserStatsPage(){
 async function getUserDiagnoses(){
     const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 	let result = null
-    try {
-        await client.connect();
-       
+    try {       
         /* fetching 1 student */
         console.log("fetching user diagnoses");
         let filter = {}
@@ -106,9 +101,7 @@ async function getUserDiagnoses(){
     } catch (e) {
         console.error(e);
 		
-    } finally {
-        await client.close();
-    }
+    } 
 	return result
 	
 
