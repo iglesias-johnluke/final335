@@ -13,8 +13,11 @@ require("dotenv").config({ path: path.resolve(__dirname, `${CREDENTIALS_FOLDER_N
 
 const mongoURI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.62m9rws.mongodb.net/?retryWrites=true&w=majority`
 const mongoClient = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-await mongoClient.connect();
 
+async function connectToMongo(){
+    await mongoClient.connect();
+
+}
 
 async function runServer(){
     const portNumber = 3000
@@ -217,5 +220,5 @@ function setEJSEngine(){
 
 }
 
-
+connectToMongo()
 runServer()
